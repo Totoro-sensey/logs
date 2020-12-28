@@ -1,0 +1,15 @@
+/*Каркас сайта*/
+.d3 span {
+
+  background: #E9967A;
+  padding: 0 15px;
+  margin-left: 20px;
+}
+
+body {
+	background-color:#FFFACD;
+}
+table {width: 100%; border-collapse: separate;  background:#FFA07A;}
+table thead tr {color: #8B0000; font-weight: bold;}
+table thead tr td {border-radius: 4px 4px 0 0; background: #2e82c3;}
+table tbody tr td:hover {background: #FFFACD; transition-duration: 0.2s;}  
