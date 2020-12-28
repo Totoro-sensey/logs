@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="windows-1251">
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="style.css">                          
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <title>
+            Logs
+        </title>
+    </head>
+    <body>
+        <title>Logs</title>
+        <div class="d3"><h1><span>Logs DISM</span></h1></div>
+        <div></div>
+        <table class="layer" width="100%" border="1" cellpadding="4" cellspacing="0">
+         <thead>
+          <tr>
+             <th width="100">№</th>
+             <th width="300">Timestamp</th>
+             <th width="200">Message Type</th>
+             <th width="1000">Source of message: Log Message itself</th>
+          </tr>
+         </thead>
+     <style>
+       .layer{
+           overflow-x: auto;
+           width: 300px;
+           border: solid 1px black;
+           white-space: nowrap; 
+         }
+     </style>
+      <?php
+      $timedate = array();
+      $mestype = array();
+      $allt = array();
+      $coin=array();
+      $i=0;
+      $tet = array(); 
+      $data = file("C:/Windows/Logs/DISM/dism.log");
+      $size = count($data,COUNT_RECURSIVE);
+  
+      while ($i <= 700){           //цикл по всем логам 
+      $tm = 0;
+      $tet = explode(" ", $data[$i]);
+      $coin[]=$i+1;
+      
+      while ($tm < 2){                     //цикл по датевремени
+      $timedate[]= $tet[$tm];
+      $tm++;
+      }
+      $allt[] = implode(" ", $timedate);   // делаем массив всех оставшихся элементом массива нового
+      $timedate= array();                  // обнуляем датувремя
+      
+      if($tet[2]){
+      $typ[]= $tet[2];                     // заносим второе поле
+      } else {
+          $typ[]= "-"; 
+      }
+      $siz= count($tet,COUNT_RECURSIVE);   //СЧИТАЕМ ЭЛЕМЕНТЫ МАССИВА
+      $n=20;
+      
+      if ($tet[$n]){                       //проверяем существует ли элемент массива
+      while ($n <= $siz){
+          $mestype[] = $tet[$n];
+          $n++;
+          
+      }} else {
+          $mestype[]= "-";                  //если не существует заполняем прочерком, а то вся табличка скашивается
+       }
+      $inall[] = implode(" ", $mestype);
+      
+      $mestype = array();                       //обнуляем массив
+      
+       $i++; 
+      }
+     ?> 
+     <tr>
+         <td>
+             <? foreach ($coin as $number) { 
+                 echo $number . "<br>\r\n\t";
+             }?>
+         </td>
+         <td>
+             <? foreach ($allt as $number) { 
+                 echo $number . "<br>\r\n\t";
+             }?>
+         </td>
+         <td>
+             <? foreach ($typ as $number) { 
+                 echo $number . "<br>\r\n\t";
+             }?>
+         </td>
+         <td>
+              <? foreach ($inall as $number) { 
+                 echo $number . "<br>\r\n\t";
+             }?>
+         </td>
+      </tr><?
+    
+      
+      ?>
+        </table>
+    </body>
+</html>
